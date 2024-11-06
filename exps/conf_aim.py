@@ -3,7 +3,7 @@ W = 1280
 final_dim = (704, 1280)
 
 
-data_root = '/kaggle/input/aimotive-multimodal-dataset'
+data_root = '/kaggle/input/aimify/aimotive'
 eval_split = 'night'  # Either None (i.e. use whole dataset) or in ['highway', 'urban', 'rain', 'night']
 experiment_name = 'lidar_radar'
 precision = 32

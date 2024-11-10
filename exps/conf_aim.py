@@ -3,15 +3,15 @@ W = 1280
 final_dim = (704, 1280)
 
 
-eval_split = None
-data_root = "/kaggle/input/ni1gbe/aimack"
-experiment_name = '20221110_cam_lidar_radar'
+data_root = '/kaggle/input/ni1gbe/aimack'
+eval_split = None  # Either None (i.e. use whole dataset) or in ['highway', 'urban', 'rain', 'night']
+experiment_name = 'lidar_cam'
 precision = 32
 batch_size = 4
-out_path = 'lidar_radar_cam'
+out_path = f'output/{experiment_name}'
 log_wandb = False
 num_workers = 8
-learning_rate = 3e-4 / 64 * batch_size
+learning_rate = 1e-3 / 64 * batch_size
 
 voxel_size = [0.2, 0.2, 8]
 out_size_factor = 4
@@ -19,16 +19,15 @@ point_cloud_range = [4*-51.2, -51.2/2, -5, 4*51.2, 51.2/2, 3]
 
 use_cam   = True
 use_lidar = True
-use_radar = True
-use_depth_loss = False
+use_radar = False
+use_depth_loss = True
 train_velocity = False
 look_back    = 0
 look_forward = 0
-ckpt_path = "/kaggle/working/lobust/exps/configs/lidar_radar_cam.ckpt"
+ckpt_path = None
 
 trainer_params = dict(enable_progress_bar=True,
                       precision=32, # 16 does not work yet
-                      devices=1,
                       )
 
 
@@ -142,7 +141,7 @@ bbox_coder = dict(
     type='CenterPointBBoxCoder',
     post_center_range=[point_cloud_range[0]-10.0, point_cloud_range[1]-10.0, -10, point_cloud_range[3]+10.0, point_cloud_range[4]+10.0, 10],
     max_num=500,
-    score_threshold=0.38,
+    score_threshold=0.1,
     out_size_factor=out_size_factor,
     voxel_size=voxel_size,
     pc_range=point_cloud_range,
@@ -157,7 +156,7 @@ train_cfg = dict(
     dense_reg=1,
     gaussian_overlap=0.1,
     max_objs=500,
-    min_radius=2,
+    min_radius=10,
     code_weights=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.3 if train_velocity else 0.0, 0.3 if train_velocity else 0.0],
 )
 

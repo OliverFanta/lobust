@@ -24,7 +24,7 @@ use_depth_loss = False
 train_velocity = False
 look_back    = 0
 look_forward = 0
-ckpt_path = "/kaggle/working/guntu/exps/configs/lidar_cam_radar.ckpt"
+ckpt_path = "/kaggle/working/lobust/exps/configs/lidar_cam_radar.ckpt"
 
 trainer_params = dict(enable_progress_bar=True,
                       precision=32, # 16 does not work yet

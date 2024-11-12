@@ -171,6 +171,8 @@ class BEVDepthLiDAR(BEVDepth):
         depth_pred, img_bev, lidar_bev, lidar_bev_ret, cam_bev_ret = None, None, None, None, None
 
         if self.use_cam:
+            if 'is_return_depth' in mats_dict:
+                del mats_dict['is_return_depth']
             img_bev, depth_pred = self.backbone(img, mats_dict, lidar_oracle, timestamps, is_return_depth=True)
 
             img_bev = self.bev_augment_image(img_bev, mats_dict['bda_mat'])

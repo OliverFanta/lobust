@@ -186,10 +186,8 @@ class LSSFPN(nn.Module):
         points = combine.view(batch_size, num_cams, 1, 1, 1, 4, 4).matmul(points)
         return points.squeeze(-1)
 
-    def forward(self, img, intrin_mat, sensor2ego_mat, is_return_depth=False):
+    def forward(self, img, intrin_mat, sensor2ego_mat):
         img_feat = self.img_neck(self.img_backbone(img))[-1]
         depth_feat = self.depth_net(img_feat)
         geom = self.get_geometry(sensor2ego_mat, intrin_mat)
-        if is_return_depth:
-            return depth_feat
         return depth_feat, geom

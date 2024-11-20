@@ -3,7 +3,7 @@ W = 1280
 final_dim = (704, 1280)
 
 
-data_root = '/kaggle/input/ni1gbe/aimack'
+data_root = '/kaggle/input/aimify/aimotive'
 eval_split = None  # Either None (i.e. use whole dataset) or in ['highway', 'urban', 'rain', 'night']
 experiment_name = 'lidar_radar_cam'
 precision = 32
@@ -17,7 +17,7 @@ voxel_size = [0.2, 0.2, 8]
 out_size_factor = 4
 point_cloud_range = [4*-51.2, 0.5*-51.2, -5, 4*51.2, 0.5*51.2, 3]
 
-use_cam   = True
+use_cam   = False
 use_lidar = True
 use_radar = True
 use_depth_loss = False
